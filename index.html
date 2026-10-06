@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KrizNotes — Simple, Private & Open Source Note-Taking</title>
+    <meta name="description" content="A lightweight, local-first, privacy-focused note-taking Android app with Markdown support and encrypted vault. Zero tracking, zero ads, 100% free forever.">
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        :root {
+            --bg-color: #0b0f17;
+            --surface: #131b26;
+            --surface-hover: #1c2738;
+            --border: #233044;
+            --primary: #00d2ff;
+            --primary-glow: rgba(0, 210, 255, 0.35);
+            --secondary: #9d4edd;
+            --text-main: #f0f4f8;
+            --text-muted: #94a3b8;
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            color: #70e0ff;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(11, 15, 23, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: #fff;
+        }
+
+        .nav-brand img {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .btn-nav {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff !important;
+            padding: 0.45rem 1rem;
+            border-radius: var(--radius-sm);
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 210, 255, 0.25);
+        }
+
+        .btn-nav:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 5rem 0 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 15%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 380px;
+            height: 380px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, rgba(157, 78, 221, 0.15) 50%, transparent 70%);
+            filter: blur(50px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .hero-logo {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 0 35px var(--primary-glow), 0 0 60px rgba(157, 78, 221, 0.3);
+            border: 2px solid rgba(0, 210, 255, 0.5);
+            animation: pulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 25px var(--primary-glow); }
+            100% { transform: scale(1.03); box-shadow: 0 0 45px var(--primary-glow), 0 0 70px rgba(157, 78, 221, 0.4); }
+        }
+
+        .hero-badges {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin-bottom: 1.2rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff 40%, var(--primary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 2.2rem;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0.85rem 1.8rem;
+            border-radius: var(--radius-md);
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 210, 255, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 210, 255, 0.5);
+            color: #fff;
+        }
+
+        .btn-secondary {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--text-main);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-hover);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Motto Section */
+        .motto-banner {
+            background: linear-gradient(135deg, rgba(0, 210, 255, 0.08), rgba(157, 78, 221, 0.08));
+            border: 1px solid rgba(0, 210, 255, 0.25);
+            border-radius: var(--radius-lg);
+            padding: 2.2rem;
+            margin: 2.5rem 0;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .motto-banner h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+            color: #fff;
+        }
+
+        .motto-banner p {
+            font-size: 1.05rem;
+            color: #cbd5e1;
+            max-width: 780px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .heart {
+            color: #ff4d6d;
+            font-size: 1.2rem;
+        }
+
+        /* Features */
+        .section-title {
+            text-align: center;
+            margin: 4.5rem 0 2rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            padding: 1.8rem;
+            transition: all 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary);
+            box-shadow: 0 8px 25px rgba(0, 210, 255, 0.1);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.6rem;
+            color: #fff;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Privacy Banner */
+        .privacy-highlight {
+            background: var(--surface);
+            border-left: 4px solid var(--primary);
+            border-radius: var(--radius-sm);
+            padding: 1.8rem;
+            margin: 3rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .privacy-highlight h4 {
+            font-size: 1.25rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .privacy-highlight p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid var(--border);
+            background: rgba(11, 15, 23, 0.95);
+            padding: 3rem 0 2rem;
+            margin-top: 5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-top: 0.8rem;
+            max-width: 320px;
+        }
+
+        .footer-col h5 {
+            color: #fff;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid var(--border);
+            padding-top: 1.8rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.4rem; }
+            .hero p { font-size: 1.05rem; }
+            .footer-grid { grid-template-columns: 1fr; }
+            nav { flex-direction: column; gap: 1rem; }
+            .nav-links { flex-wrap: wrap; justify-content: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-brand">
+            <img src="logo.png" alt="KrizNotes Logo">
+            <span>KrizNotes</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="https://github.com/altkriz/KrizNotes" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://github.com/altkriz/KrizNotes/releases" class="btn-nav">Download APK</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <!-- Hero -->
+        <section class="hero">
+            <img src="logo.png" alt="KrizNotes Emblem" class="hero-logo">
+            <div class="hero-badges">
+                <span class="badge">v1.0 Release</span>
+                <span class="badge">100% Offline</span>
+                <span class="badge">GNU GPL-3.0</span>
+                <span class="badge">Zero Tracking</span>
+            </div>
+            <h1>Simple, Private &amp; Open Source</h1>
+            <p>Fast, markdown-powered note-taking with local database storage, encrypted note vault, and AMOLED optimization. No accounts. No tracking. 100% free forever.</p>
+            <div class="hero-actions">
+                <a href="https://github.com/altkriz/KrizNotes/releases" class="btn btn-primary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+                    Download Release APK
+                </a>
+                <a href="https://github.com/altkriz/KrizNotes" class="btn btn-secondary" target="_blank" rel="noopener">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    Source on GitHub
+                </a>
+            </div>
+        </section>
+
+        <!-- Our Motto -->
+        <section class="motto-banner" id="about">
+            <h3>Our Motto: Free &amp; Open Source for Everyone</h3>
+            <p>
+                We don't need money from our users — no donations, no fees, no paywalls. We believe in providing high-quality, completely free, and open-source software that respects your personal privacy. We just want your love and support! <span class="heart">❤</span>
+            </p>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="section-title" id="features">
+            <h2>Designed for Privacy, Speed &amp; Simplicity</h2>
+            <p>Everything you need to write and secure your thoughts without the bloat.</p>
+        </section>
+
+        <div class="grid">
+            <div class="card">
+                <span class="card-icon">🔒</span>
+                <h3>100% Offline &amp; Private</h3>
+                <p>Zero internet connection required for note storage. All notes are saved locally on your device in an encrypted Room database. Your data never touches a remote server.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">🛡️</span>
+                <h3>Encrypted Note Vault</h3>
+                <p>Lock your most sensitive notes behind a custom passcode or biometric authentication. Encrypted notes remain invisible until safely unlocked.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">✍️</span>
+                <h3>Rich Markdown Formatting</h3>
+                <p>Full support for headers, bold, italics, code blocks, bullet points, checklists, and links. Live preview lets you format notes effortlessly.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">📂</span>
+                <h3>Import Text &amp; Backup Files</h3>
+                <p>Easily import individual or multiple <code>.txt</code> and <code>.md</code> files as notes. Export encrypted ZIP backups to keep your thoughts safe across devices.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">🎨</span>
+                <h3>Material Design 3 &amp; AMOLED</h3>
+                <p>Built with Jetpack Compose. Enjoy dynamic colors, customizable card corner radii, and a true-black Extreme AMOLED mode that saves battery.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">👁️</span>
+                <h3>Privacy Screen Protection</h3>
+                <p>Optional screen protection obscures app previews in Android's recent apps view and blocks unauthorized screenshots while you're taking notes.</p>
+            </div>
+        </div>
+
+        <!-- Privacy Callout -->
+        <div class="privacy-highlight">
+            <div>
+                <h4>Your Privacy is Absolute</h4>
+                <p>No telemetry, no behavioral profiles, no advertising SDKs, and zero cloud leaks. Read our complete privacy promise.</p>
+            </div>
+            <a href="privacy.html" class="btn btn-secondary">Read Privacy Policy →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <div class="nav-brand">
+                    <img src="logo.png" alt="KrizNotes Logo">
+                    <span>KrizNotes</span>
+                </div>
+                <p>A fast, private, and open-source note-taking app built with modern Android Jetpack Compose.</p>
+            </div>
+            <div class="footer-col">
+                <h5>Navigation</h5>
+                <ul>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="https://github.com/altkriz/KrizNotes/releases">Releases</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Community</h5>
+                <ul>
+                    <li><a href="https://github.com/altkriz/KrizNotes" target="_blank" rel="noopener">GitHub Repository</a></li>
+                    <li><a href="https://altkriz.github.io" target="_blank" rel="noopener">altkriz.github.io</a></li>
+                    <li><a href="https://www.instagram.com/altkriz/" target="_blank" rel="noopener">Instagram (@altkriz)</a></li>
+                    <li><a href="mailto:altkriz@proton.me">altkriz@proton.me</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 KrizNotes. Licensed under GNU General Public License v3.0 (GPL-3.0). Free and open source.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

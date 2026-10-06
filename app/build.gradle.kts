@@ -4,34 +4,33 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.google.services)
 }
 
 android {
-    namespace = "com.kin.easynotes"
+    namespace = "com.kriztech.kriznotes"
     compileSdk = 36
-    flavorDimensions += "store"
-
-    productFlavors {
-        create("fdroid") {
-            dimension = "store"
-            applicationId = "com.kin.easynotes"
-            versionNameSuffix = "-fdroid"
-            isDefault = true
+    signingConfigs {
+        create("debugConfig") {
+            storeFile = file("${rootDir}/debug.keystore")
+            storePassword = "android"
+            keyAlias = "androiddebugkey"
+            keyPassword = "android"
         }
-
-        create("playstore") {
-            dimension = "store"
-            applicationId = "com.kin.easynotes"
-            versionNameSuffix = "-playstore"
+        create("releaseConfig") {
+            storeFile = file("${rootDir}/release.jks")
+            storePassword = "kriznotes123"
+            keyAlias = "kriznotes"
+            keyPassword = "kriznotes123"
         }
     }
 
     defaultConfig {
-        applicationId = "com.kin.easynotes"
+        applicationId = "com.kriztech.kriznotes"
         minSdk = 26
         targetSdk = 36
-        versionCode = 14
-        versionName = "1.7"
+        versionCode = 1
+        versionName = "1.0"
         vectorDrawables {
             useSupportLibrary = true
         }
@@ -51,7 +50,7 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("releaseConfig")
         }
 
         debug {
@@ -60,9 +59,8 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("debugConfig")
             isDebuggable = true
-            applicationIdSuffix = ".debug"
         }
     }
     compileOptions {
@@ -105,5 +103,8 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.androidx.navigation.compose)
-    "playstoreImplementation"(libs.billing)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 }

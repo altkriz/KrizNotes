@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — KrizNotes</title>
+    <meta name="description" content="Privacy Policy for KrizNotes. We do not collect, store, or share any personal data.">
+    <link rel="icon" type="image/png" href="logo.png">
+    <style>
+        :root {
+            --bg-color: #0b0f17;
+            --surface: #131b26;
+            --border: #233044;
+            --primary: #00d2ff;
+            --primary-glow: rgba(0, 210, 255, 0.35);
+            --text-main: #f0f4f8;
+            --text-muted: #94a3b8;
+            --radius-md: 14px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.7;
+            padding-bottom: 4rem;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        nav {
+            background: rgba(11, 15, 23, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 900px;
+            margin: 0 auto 2.5rem;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #fff;
+        }
+
+        .nav-brand img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .header-section {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .header-section h1 {
+            font-size: 2.4rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .meta-text {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .callout {
+            background: rgba(0, 210, 255, 0.08);
+            border-left: 4px solid var(--primary);
+            border-radius: 6px;
+            padding: 1.2rem;
+            margin: 1.8rem 0;
+            font-size: 1.05rem;
+            color: #e2e8f0;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 2.2rem 0 0.8rem;
+            color: #fff;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 0.4rem;
+        }
+
+        h3 {
+            font-size: 1.2rem;
+            margin: 1.5rem 0 0.6rem;
+            color: #e2e8f0;
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            color: #cbd5e1;
+        }
+
+        ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #cbd5e1;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            background: #1e293b;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.9em;
+            color: #70e0ff;
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-brand">
+            <a href="index.html" style="display:flex; align-items:center; gap:12px; color:#fff;">
+                <img src="logo.png" alt="KrizNotes Logo">
+                <span>KrizNotes</span>
+            </a>
+        </div>
+        <div>
+            <a href="index.html">← Back to Home</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Privacy Policy</h1>
+            <p class="meta-text">Effective Date: October 6, 2026 &bull; Application: KrizNotes (com.kriztech.kriznotes)</p>
+        </div>
+
+        <div class="callout">
+            <strong>Summary:</strong> KrizNotes is designed from the ground up to respect your privacy. <strong>We do not collect, store, transmit, or sell any of your personal data or note content.</strong> Everything you write stays strictly on your device.
+        </div>
+
+        <h2>1. Information We Collect</h2>
+        <p><strong>None.</strong> KrizNotes operates as a local-only application. Specifically:</p>
+        <ul>
+            <li><strong>No Account Registration:</strong> You do not need to create an account, log in, or provide your email address, name, or phone number to use KrizNotes.</li>
+            <li><strong>No Note Telemetry:</strong> Your note titles, text, markdown contents, tags, and timestamps are stored strictly in an encrypted local database (Room SQLite) on your physical Android device.</li>
+            <li><strong>No Tracking / Ad SDKs:</strong> KrizNotes contains zero advertising SDKs, zero behavioral trackers, and zero analytics telemetry.</li>
+            <li><strong>No Cloud Sync:</strong> We do not operate external cloud sync servers for your notes. Your notes never leave your device unless you manually choose to export a backup file.</li>
+        </ul>
+
+        <h2>2. Data Storage and Security</h2>
+        <p>All data created inside KrizNotes is retained strictly within the application's private storage sandbox on your Android device:</p>
+        <ul>
+            <li><strong>Note Vault Encryption:</strong> Notes placed inside the "Vault" are protected using cryptographic encryption. Access is guarded by your local passcode or device biometric authentication.</li>
+            <li><strong>Screen Protection (FLAG_SECURE):</strong> When enabled in Settings &rarr; Privacy, KrizNotes activates Android's <code>FLAG_SECURE</code> to prevent screenshots and hide app contents from the recent applications switcher.</li>
+            <li><strong>Backups:</strong> If you use the Export Backup feature, an archive file is created only in the location on your device or storage provider that you explicitly select using the Android system file picker. Optional password encryption is applied directly on your device.</li>
+        </ul>
+
+        <h2>3. Device Permissions &amp; Usage</h2>
+        <p>KrizNotes requests only the minimum system permissions necessary to deliver local user features:</p>
+        <ul>
+            <li><strong>Storage / Document Access (SAF):</strong> Handled strictly through Android's zero-permission Storage Access Framework (SAF) system picker. Used only when you manually choose to import <code>.txt</code> / <code>.md</code> files or export your backup archives.</li>
+            <li><strong>Biometric Authentication:</strong> Used exclusively to verify your identity locally on-device when unlocking your encrypted Note Vault. Your biometric data is managed securely by Android's hardware keystore and is never accessible to the app.</li>
+        </ul>
+
+        <h2>4. Third-Party Services</h2>
+        <p>KrizNotes does not integrate with any third-party advertising networks, analytics tracking services, or data brokers. The app does not transmit device identifiers (such as IMEI, Android ID, or advertising IDs) to any party.</p>
+
+        <h2>5. Data Retention &amp; Deletion</h2>
+        <p>Because all data is stored on your device, you have complete and permanent control over your data:</p>
+        <ul>
+            <li>You can delete any note, folder, or vault entry directly inside the app at any time.</li>
+            <li>Clearing the app data via Android Settings &rarr; Apps &rarr; KrizNotes &rarr; Clear Storage or uninstalling the app permanently erases all locally stored notes and keys from your device.</li>
+        </ul>
+
+        <h2>6. Children's Privacy</h2>
+        <p>KrizNotes does not collect any personal information from anyone, including children under the age of 13. The application is completely safe and private for users of all ages.</p>
+
+        <h2>7. Open Source Transparency</h2>
+        <p>KrizNotes is 100% open-source software licensed under the <strong>GNU General Public License v3 (GPL-3.0)</strong>. Anyone can independently inspect, audit, and verify our source code on GitHub to verify our privacy commitments: <a href="https://github.com/altkriz/KrizNotes" target="_blank" rel="noopener">https://github.com/altkriz/KrizNotes</a>.</p>
+
+        <h2>8. Contact Us</h2>
+        <p>If you have any questions or feedback regarding this Privacy Policy, you can reach out directly:</p>
+        <ul>
+            <li><strong>Developer:</strong> altkriz</li>
+            <li><strong>Email:</strong> <a href="mailto:altkriz@proton.me">altkriz@proton.me</a></li>
+            <li><strong>GitHub:</strong> <a href="https://github.com/altkriz/KrizNotes" target="_blank" rel="noopener">github.com/altkriz/KrizNotes</a></li>
+            <li><strong>Website:</strong> <a href="https://altkriz.github.io" target="_blank" rel="noopener">altkriz.github.io</a></li>
+        </ul>
+
+        <footer>
+            <p>&copy; 2026 KrizNotes. Licensed under GNU GPL-3.0. <a href="terms.html">Terms of Service</a> &bull; <a href="index.html">Home</a></p>
+        </footer>
+    </div>
+
+</body>
+</html>

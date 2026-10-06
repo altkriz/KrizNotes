@@ -51,7 +51,6 @@ local.properties
 captures/
 .externalNativeBuild/
 .cxx/
-*.apk
 output.json
 
 # IntelliJ
@@ -61,9 +60,15 @@ misc.xml
 deploymentTargetDropDown.xml
 render.experimental.xml
 
-# Keystore files
+# Keystore and sensitive build artifacts (Never pushed to GitHub)
+*.aab
 *.jks
 *.keystore
+*release.jks*
+*.base64*
+release.jks.base64.txt
+KEYSTORE-INFO.txt
+app/releases/*.aab
 
 # Android Profiling
 *.hprof

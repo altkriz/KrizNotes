@@ -1,0 +1,8 @@
+{
+  "name": "KrizNotes",
+  "description": "A lightweight, private and open-source note-taking app with markdown support and encryption.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
