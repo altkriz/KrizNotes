@@ -74,16 +74,7 @@ KrizNotes is designed with absolute privacy in mind:
 - **Minimal Permissions:** Only uses Android's native Storage Access Framework (SAF) when you manually choose to import/export notes, and biometric hardware for unlocking your vault.
 - Read our full [Privacy Policy](privacy.html) and [Terms of Service](terms.html).
 
----
 
-## 🔑 Release Certificate Fingerprints
-
-Official release builds are signed with our dedicated release certificate:
-
-- **Algorithm:** RSA 2048-bit (APK Signature Scheme v2)
-- **SHA-256:** `1a:58:2a:6f:e5:ea:e2:d4:4a:2b:1b:60:3b:00:b7:9b:61:cd:28:3a:33:4d:e5:9c:72:cd:c5:fc:0c:30:34:67`
-- **SHA-1:** `67:a0:c2:6d:9c:77:b2:03:2c:70:6d:31:6d:29:ee:83:0c:75:fe:bc`
-- **MD5:** `1d:7f:be:3b:4a:f3:01:f0:b9:36:75:6f:5e:9a:df:3b`
 
 ---
 
